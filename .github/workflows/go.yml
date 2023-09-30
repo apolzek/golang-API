@@ -13,6 +13,18 @@ jobs:
 
   build:
     runs-on: ubuntu-latest
+
+    services:
+      mysql:
+        image: mysql:5.7
+        env:
+          MYSQL_DATABASE: go_gin_gonic
+          MYSQL_USER: 'user'
+          MYSQL_PASSWORD: '1234'
+          MYSQL_ROOT_PASSWORD: 'root@1234'
+        ports:
+          - 3306:3306
+
     steps:
     - uses: actions/checkout@v3
 
@@ -23,6 +35,12 @@ jobs:
 
     - name: Build
       run: go build -o app  -v ./cmd/
+
+    - name: Download migrate
+      run: wget -qO- https://github.com/golang-migrate/migrate/releases/download/v4.16.2/migrate.linux-amd64.tar.gz | tar xvz
+
+    - name: Run migrate
+      run:  ./migrate -path database/migrations/ -database "mysql://user:1234@tcp(0.0.0.0:3306)/go_gin_gonic?charset=utf8mb4&parseTime=True&loc=Local" up
 
     - name: Test
       run: go test -v ./...
