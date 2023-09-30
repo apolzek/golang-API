@@ -23,7 +23,7 @@ jobs:
           MYSQL_PASSWORD: '12345'
           MYSQL_ROOT_PASSWORD: 'root@1234'
         ports:
-          - 33306:3306
+          - 3306:3306
 
     steps:
     - uses: actions/checkout@v3
