@@ -13,6 +13,18 @@ jobs:
 
   build:
     runs-on: ubuntu-latest
+
+    services:
+      mysql:
+        image: mysql:5.7
+        env:
+          MYSQL_DATABASE: go_gin_gonic
+          MYSQL_USER: 'user'
+          MYSQL_PASSWORD: '12345'
+          MYSQL_ROOT_PASSWORD: 'root@1234'
+        ports:
+          - 33306:3306
+
     steps:
     - uses: actions/checkout@v3
 
@@ -23,9 +35,6 @@ jobs:
 
     - name: Build
       run: go build -o app  -v ./cmd/
-
-    - name: Up database
-      run: docker-compose up -d
 
     - name: Download migrate
       run: wget -qO- https://github.com/golang-migrate/migrate/releases/download/v4.16.2/migrate.linux-amd64.tar.gz | tar xvz
