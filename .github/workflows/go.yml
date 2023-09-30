@@ -20,7 +20,7 @@ jobs:
         env:
           MYSQL_DATABASE: go_gin_gonic
           MYSQL_USER: 'user'
-          MYSQL_PASSWORD: '12345'
+          MYSQL_PASSWORD: '1234'
           MYSQL_ROOT_PASSWORD: 'root@1234'
         ports:
           - 3306:3306
