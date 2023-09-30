@@ -40,7 +40,7 @@ jobs:
       run: wget -qO- https://github.com/golang-migrate/migrate/releases/download/v4.16.2/migrate.linux-amd64.tar.gz | tar xvz
 
     - name: Run migrate
-      run:  ./migrate -path database/migrations/ -database "mysql://user:1234@tcp(mysql:3306)/go_gin_gonic?charset=utf8mb4&parseTime=True&loc=Local" up
+      run:  ./migrate -path database/migrations/ -database "mysql://user:1234@tcp(0.0.0.0:3306)/go_gin_gonic?charset=utf8mb4&parseTime=True&loc=Local" up
 
     - name: Test
       run: go test -v ./...
